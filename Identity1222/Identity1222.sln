@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppDemo", "ConsoleAppDemo\ConsoleAppDemo.csproj", "{E745A56B-C77F-4F29-80E8-D3E71E309EAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCClientCred", "MVCClientCred\MVCClientCred.csproj", "{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E745A56B-C77F-4F29-80E8-D3E71E309EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E745A56B-C77F-4F29-80E8-D3E71E309EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E745A56B-C77F-4F29-80E8-D3E71E309EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
