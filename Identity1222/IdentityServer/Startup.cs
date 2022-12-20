@@ -1,7 +1,9 @@
+using IdentityServer.AspIdentity;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +29,24 @@ namespace IdentityServer
         {
             services.AddControllersWithViews();
 
+            services.AddDbContext<AuthenticationDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
+            });
+
+            //aspidentity
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                //options.Password.RequiredLength = 6;
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.User.RequireUniqueEmail = true;
+                //...
+            })
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<AuthenticationDbContext>()
+                .AddUserManager<UserManager<User>>();
+
+
             //service identityserver
             var builder = services.AddIdentityServer(options =>
             {
@@ -44,7 +64,7 @@ namespace IdentityServer
                 store.DefaultSchema = "operational";
                 store.ConfigureDbContext = db => db.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"),
                     sql => sql.MigrationsAssembly("IdentityServer"));
-            });
+            }).AddAspNetIdentity<User>();
 
             //uniquement en dev
             builder.AddDeveloperSigningCredential();
