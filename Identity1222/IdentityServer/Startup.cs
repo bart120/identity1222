@@ -1,6 +1,8 @@
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,11 +26,34 @@ namespace IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //service identityserver
+            var builder = services.AddIdentityServer(options =>
+            {
+                options.Endpoints.EnableDeviceAuthorizationEndpoint = false;
+                //options.Endpoints.EnableUserInfoEndpoint = false;
+                options.UserInteraction.LoginUrl = "/login";
+                options.UserInteraction.LogoutUrl = "/logout";
+            }).AddConfigurationStore(store =>
+            {
+                store.DefaultSchema = "configuration";
+                store.ConfigureDbContext = db => db.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"),
+                    sql => sql.MigrationsAssembly("IdentityServer"));
+            }).AddOperationalStore(store =>
+            {
+                store.DefaultSchema = "operational";
+                store.ConfigureDbContext = db => db.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"),
+                    sql => sql.MigrationsAssembly("IdentityServer"));
+            });
+
+            //uniquement en dev
+            builder.AddDeveloperSigningCredential();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -43,6 +68,8 @@ namespace IdentityServer
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseIdentityServer();
 
             app.UseAuthorization();
 
