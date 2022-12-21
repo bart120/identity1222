@@ -37,7 +37,33 @@ namespace WebApi
                 };
                 
             });
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("read", p =>
+                {
+                    p.RequireClaim("scope", "api_demo_scope_read");
+                });
+
+                options.AddPolicy("update", p =>
+                {
+                    p.RequireClaim("scope", "api_demo_scope_delete");
+                    p.RequireClaim("weather", "update");
+                });
+
+                options.AddPolicy("delete", p =>
+                {
+                    p.RequireClaim("scope", "api_demo_scope_delete");
+                    p.RequireClaim("weather", "delete");
+                });
+            });
+
+            /*services.AddAuthorization(options =>
+            {
+                options.AddPolicy("bob", p =>
+                {
+                    p.RequireClaim("scope", "api_demo_scope_read");
+                });
+            });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

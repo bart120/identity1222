@@ -1,5 +1,7 @@
 using IdentityServer.AspIdentity;
+using IdentityServer.Services;
 using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -65,6 +67,8 @@ namespace IdentityServer
                 store.ConfigureDbContext = db => db.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"),
                     sql => sql.MigrationsAssembly("IdentityServer"));
             }).AddAspNetIdentity<User>();
+
+            services.AddTransient<IProfileService, ProfileService>();
 
             //uniquement en dev
             builder.AddDeveloperSigningCredential();

@@ -1,15 +1,40 @@
 ﻿using IdentityModel.Client;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ConsoleAppDemo
 {
+    [AttributeUsage(AttributeTargets.Method)]
+    public class TestAttribute:Attribute
+    {
+        public void OnBeforeExecute()
+        {
+            Console.WriteLine("OnBeforeExecute says.");
+        }
+
+    }
     internal class Program
     {
+        [Test()]
+        public void test(string name)
+        {
+
+        }
+
         static async Task Main(string[] args)
         {
-            using(var client = new HttpClient())
+            var p = new Program();
+            typeof(Program)
+            .GetMethod(nameof(p.test))
+            .GetCustomAttributes(true)
+            .OfType<TestAttribute>()
+            .First()
+            .OnBeforeExecute();
+            p.test("bob");
+               
+            /*using(var client = new HttpClient())
             {
                 var disco = await client.GetDiscoveryDocumentAsync("https://localhost:44361/");
 
@@ -43,7 +68,7 @@ namespace ConsoleAppDemo
                     }
                 }
                 Console.ReadLine();
-            }
+            }*/
 
         }
     }

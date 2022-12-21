@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppDemo", "ConsoleAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCClientCred", "MVCClientCred\MVCClientCred.csproj", "{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCClient", "MVCClient\MVCClient.csproj", "{521D6BDA-72C7-4078-B125-61CA2DAAD6BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D62D59DA-9B25-495C-A5AC-C0C74EF07AB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{521D6BDA-72C7-4078-B125-61CA2DAAD6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521D6BDA-72C7-4078-B125-61CA2DAAD6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521D6BDA-72C7-4078-B125-61CA2DAAD6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521D6BDA-72C7-4078-B125-61CA2DAAD6BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
